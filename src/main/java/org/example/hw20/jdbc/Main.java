@@ -18,7 +18,7 @@ public class Main {
         //jdbcBookDAO.save(book);
         System.out.println(jdbcBookDAO.findById(3L));
         System.out.println(jdbcBookDAO.getAll());
-        //jdbcBookDAO.update(3, book);
+        //jdbcBookDAO.update(3L, book);
         //jdbcBookDAO.deleteById(9L);
 
     }

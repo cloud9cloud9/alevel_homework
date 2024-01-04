@@ -2,6 +2,7 @@ package org.example.hw20.jdbc.Dao;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hw20.DAO.Dao;
 import org.example.hw20.jdbc.DaoException.DaoException;
 import org.example.hw20.jdbc.Entity.Book;
 import org.example.hw20.jdbc.util.ConnectionManager;
@@ -46,21 +47,21 @@ public class JDBCBookDAO implements Dao<Book> {
     }
 
     @Override
-    public Book save(Book elements) {
+    public Book save(Book book) {
         try (var connection = ConnectionManager.get()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, elements.getTitle());
-            preparedStatement.setString(2, elements.getAuthor());
-            preparedStatement.setDate(3, Date.valueOf(elements.getCreationDate()));
-            preparedStatement.setDouble(4, elements.getPrice());
+            preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setDate(3, Date.valueOf(book.getCreationDate()));
+            preparedStatement.setDouble(4, book.getPrice());
 
             preparedStatement.executeUpdate();
 
             var generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                elements.setId(generatedKeys.getLong("id"));
+                book.setId(generatedKeys.getLong("id"));
             }
-            return elements;
+            return book;
 
         } catch (SQLException throwables) {
             throw new DaoException(throwables);
@@ -103,13 +104,13 @@ public class JDBCBookDAO implements Dao<Book> {
     }
 
     @Override
-    public void update(long bookId, Book elements) {
+    public void update(Long bookId, Book book) {
         try (var connection = ConnectionManager.get()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL);
-            preparedStatement.setString(1, elements.getTitle());
-            preparedStatement.setString(2, elements.getAuthor());
-            preparedStatement.setDate(3, Date.valueOf(elements.getCreationDate()));
-            preparedStatement.setDouble(4, elements.getPrice());
+            preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setDate(3, Date.valueOf(book.getCreationDate()));
+            preparedStatement.setDouble(4, book.getPrice());
             preparedStatement.setLong(5, bookId);
 
             preparedStatement.executeUpdate();
@@ -119,7 +120,7 @@ public class JDBCBookDAO implements Dao<Book> {
     }
 
     @Override
-    public boolean deleteById(long id) {
+    public boolean deleteById(Long id) {
         try (var connection = ConnectionManager.get()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL);
             preparedStatement.setLong(1, id);

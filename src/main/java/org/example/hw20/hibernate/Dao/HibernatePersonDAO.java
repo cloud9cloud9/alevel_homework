@@ -2,6 +2,7 @@ package org.example.hw20.hibernate.Dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import org.example.hw20.DAO.Dao;
 import org.example.hw20.hibernate.DaoException.DaoException;
 import org.example.hw20.hibernate.Entity.Person;
 
@@ -10,14 +11,14 @@ import java.util.Optional;
 
 import static org.example.hw20.hibernate.util.HibernateUtil.getEntityManager;
 
-public class HibernatePersonDAO implements Dao<Person>{
+public class HibernatePersonDAO implements Dao<Person> {
     @Override
-    public Person save(Person elements) {
+    public Person save(Person person) {
         try (EntityManager em = getEntityManager()) {
             em.getTransaction().begin();
-            em.persist(elements);
+            em.persist(person);
             em.getTransaction().commit();
-            return elements;
+            return person;
         } catch (Exception e) {
             throw new DaoException("fail");
         }
@@ -43,7 +44,7 @@ public class HibernatePersonDAO implements Dao<Person>{
     }
 
     @Override
-    public void update(long id, Person person) {
+    public void update(Long id, Person person) {
         String hql = "UPDATE Person SET " +
                 "name = :name, " +
                 "lastName = :lastName, " +
@@ -64,7 +65,7 @@ public class HibernatePersonDAO implements Dao<Person>{
     }
 
     @Override
-    public boolean deleteById(long id) {
+    public boolean deleteById(Long id) {
         String hql = "DELETE Person " +
                 "WHERE id = :id";
         try (EntityManager em = getEntityManager()) {

@@ -24,9 +24,9 @@ public class Main {
                 .build());
         System.out.println(hibernatePersonDAO.findById(3L));
         System.out.println(hibernatePersonDAO.getAll());
-        //hibernatePersonDAO.update(3,person);
+        //hibernatePersonDAO.update(3L,person);
 
-        //hibernatePersonDAO.deleteById(5);
+        //hibernatePersonDAO.deleteById(5L);
 
     }
 }
