@@ -6,17 +6,19 @@ import org.example.hw20.HibernatePartTwo.Entity.User;
 public class Main {
     public static void main(String[] args) {
         User user = User.builder()
-                .userName("Lom")
-                .email("makrovskiy")
+                .userName("kokos")
+                .email("valevskiy")
                 .build();
         JpaUserDao jpaUserDao = new JpaUserDao();
-        //jpaUserDao.save(user);
+//        jpaUserDao.save(user);
         System.out.println(jpaUserDao.findById(3L));
         System.out.println(jpaUserDao.getAll());
-        jpaUserDao.update(5L, User.builder()
-                .userName("kkk")
-                .email("aadda@gmailc.com")
-                .build());
-        jpaUserDao.deleteById(6L);
+//        jpaUserDao.update(5L, User.builder()
+//                .userName("kkk")
+//                .email("aadda@gmailc.com")
+//                .build());
+//        jpaUserDao.deleteById(6L);
+        System.out.println(jpaUserDao.findAllByUserName("Lom"));
+        System.out.println(jpaUserDao.countUsers());
     }
 }
