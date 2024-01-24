@@ -1,0 +1,46 @@
+HTTP (Hypertext Transfer Protocol) - протокол передачі гіпертексту в мережі Інтернет.
+GET-запити використовуються для отримання ресурсів з сервера.
+коротка структура GET - запиту
+Метод: GET
+Шлях до ресурсу: /path/to/resource
+Опціональні параметри: ?param1=value1&param2=value2
+Версія HTTP: версія
+Host: посилання
+
+
+POST-запит використовується для відправлення даних на сервер.
+Тіло запиту може містити будь-які дані, наприклад, форму, файли або JSON.
+
+Метод: POST
+Шлях до ресурсу: /path/to/resource
+Версія HTTP: версія
+Заголовок Content-Type:  application/json
+Заголовок Content-Length:  43
+Тіло запиту: {"key1": "value1", "key2": "value2", "key3": "value3"}
+....
+{
+  "productId": "1234",
+  "productName": "Football",
+  "productCategory": "Sports",
+  "price": 15.50
+}
+...
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "age": 22,
+      "major": "Computer Science"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "age": 23,
+      "major": "Mathematics"
+    }
+  ]
+}
+
+
+
